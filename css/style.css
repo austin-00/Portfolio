@@ -51,8 +51,18 @@ body {
     color: var(--text-primary);
     text-decoration: none;
     transition: color 0.3s ease;
+    display: flex;
+        align-items: center;
+        text-decoration: none
 }
-
+.navbar .logo img {
+    height: 40px;
+    /* Adjust height according to your image proportions */
+    width: auto;
+    /* Maintains aspect ratio */
+    display: block;
+    object-fit: contain;
+}
 .navbar .logo:hover {
     color: var(--accent-light);
 }
