@@ -1,0 +1,373 @@
+:root {
+    /* Colors */
+    --bg: #08090c;
+    --surface: #101218;
+    --surface-light: #161922;
+
+    --text-primary: #f5f7fa;
+    --text-secondary: #9ca3af;
+
+    --accent: #7c5cff;
+    --accent-light: #9b85ff;
+
+    --border: #242832;
+
+    /* Spacing */
+    --section-padding: 100px;
+
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+}
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: "Inter", sans-serif;
+}
+/* Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2.5rem;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+/* Logo (Left side) */
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar .logo:hover {
+    color: var(--accent-light);
+}
+
+/* Navigation Links Container (Right side) */
+.navbar .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Link Styling */
+.navbar .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s ease;
+}
+
+/* Hover & Active States */
+.navbar .nav-links a:hover {
+    color: var(--text-primary);
+    background-color: var(--surface-light);
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.hero{
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--section-padding) 40px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+}
+.intro {
+    max-width: 650px;
+}
+.cta {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+}
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.workflow {
+    position: relative;
+    width: 300px;
+    height: 320px;
+}
+
+.workflow-step {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.workflow-step.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================
+   BUILD
+========================= */
+
+.build-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.build-node {
+    padding: 10px 20px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #9b9b9b;
+
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.build-connector {
+    font-size: 18px;
+    opacity: 0.5;
+}
+
+.build-node.animate:nth-child(1) {
+    animation: workflowReveal 0.5s ease 0.2s forwards;
+}
+
+.build-node.animate:nth-child(3) {
+    animation: workflowReveal 0.5s ease 0.7s forwards;
+}
+
+.build-node.animate:nth-child(5) {
+    animation: workflowReveal 0.5s ease 1.2s forwards;
+}
+
+.build-node.animate:nth-child(7) {
+    animation: workflowReveal 0.5s ease 1.7s forwards;
+}
+
+
+/* =========================
+   TEST
+========================= */
+
+.test-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.test-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 20px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #9b9b9b;
+
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.test-item span {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.test-item strong {
+    display: inline-block;
+
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+
+/* Test blocks appear */
+
+.test-item.animate:nth-child(1) {
+    animation: workflowReveal 0.5s ease 0.2s forwards;
+}
+
+.test-item.animate:nth-child(2) {
+    animation: workflowReveal 0.5s ease 0.7s forwards;
+}
+
+.test-item.animate:nth-child(3) {
+    animation: workflowReveal 0.5s ease 1.2s forwards;
+}
+
+
+/* Checkmarks appear */
+
+.test-item.animate:nth-child(1) strong {
+    animation: testCheck 0.4s ease 0.8s forwards;
+}
+
+.test-item.animate:nth-child(2) strong {
+    animation: testCheck 0.4s ease 1.3s forwards;
+}
+
+.test-item.animate:nth-child(3) strong {
+    animation: testCheck 0.4s ease 1.8s forwards;
+}
+
+
+@keyframes testCheck {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   FIX
+========================= */
+
+.fix-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.fix-item {
+    padding: 10px 20px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #9b9b9b;
+
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.fix-connector {
+    font-size: 18px;
+    opacity: 0.5;
+}
+
+.fix-item.animate:nth-child(1) {
+    animation: workflowReveal 0.5s ease 0.2s forwards;
+}
+
+.fix-item.animate:nth-child(3) {
+    animation: workflowReveal 0.5s ease 0.7s forwards;
+}
+
+.fix-item.animate:nth-child(5) {
+    animation: workflowReveal 0.5s ease 1.2s forwards;
+}
+
+
+/* =========================
+   AUTOMATE
+========================= */
+
+.automate-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.automate-item {
+    padding: 10px 20px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #9b9b9b;
+
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.automate-connector {
+    font-size: 18px;
+    opacity: 0.5;
+}
+
+.automate-item.animate:nth-child(1) {
+    animation: workflowReveal 0.5s ease 0.2s forwards;
+}
+
+.automate-item.animate:nth-child(3) {
+    animation: workflowReveal 0.5s ease 0.7s forwards;
+}
+
+.automate-item.animate:nth-child(5) {
+    animation: workflowReveal 0.5s ease 1.2s forwards;
+}
+
+
+/* =========================
+   SHARED ANIMATION
+========================= */
+
+@keyframes workflowReveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
