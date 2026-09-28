@@ -143,10 +143,10 @@ a {
 }
 
 .hero-image img {
-    width: 50%;
-    max-width: auto;
-    height: 240px;
-    border-radius: 0%;
+    width: 100%;
+    max-width: 140px;
+    height: 140px;
+    border-radius: 50%;
     border: 2px solid var(--accent);
     object-fit: cover;
     box-shadow: 0 10px 30px rgba(124, 92, 255, 0.2);
