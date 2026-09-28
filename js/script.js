@@ -1,101 +1,53 @@
-const steps = document.querySelectorAll(".workflow-step");
-let currentStep = 0;
+document.addEventListener("DOMContentLoaded", () => {
+    const steps = document.querySelectorAll(".workflow-step");
+    if (!steps.length) return;
 
+    let currentStep = 0;
 
-function restartAnimation(container, selector) {
-    const items = container.querySelectorAll(selector);
+    function restartAnimation(container, selector) {
+        const items = container.querySelectorAll(selector);
 
-    items.forEach(item => {
-        item.classList.remove("animate");
-    });
+        items.forEach(item => item.classList.remove("animate"));
 
-    void container.offsetWidth;
+        // Reflow trick to restart CSS animations
+        void container.offsetWidth;
 
-    items.forEach(item => {
-        item.classList.add("animate");
-    });
-}
-
-
-function showStep() {
-    steps.forEach(step => {
-        step.classList.remove("active");
-    });
-
-    const current = steps[currentStep];
-
-    current.classList.add("active");
-
-    if (current.dataset.step === "build") {
-        restartAnimation(current, ".build-node");
+        items.forEach(item => item.classList.add("animate"));
     }
 
-    if (current.dataset.step === "test") {
-        restartAnimation(current, ".test-item");
+    function update3DCarousel() {
+        const total = steps.length;
+
+        steps.forEach((step, index) => {
+            // Reset positional classes
+            step.classList.remove("active", "prev", "next");
+
+            if (index === currentStep) {
+                // Active Front Card
+                step.classList.add("active");
+
+                // Trigger node animations for the active step
+                const stepType = step.dataset.step;
+                const childSelector = `.${stepType}-node, .${stepType}-item, .connector`;
+                restartAnimation(step, childSelector);
+
+            } else if (index === (currentStep - 1 + total) % total) {
+                // Card rotating out to the left
+                step.classList.add("prev");
+
+            } else if (index === (currentStep + 1) % total) {
+                // Card waiting to rotate in from the right
+                step.classList.add("next");
+            }
+        });
     }
 
-    if (current.dataset.step === "fix") {
-        restartAnimation(current, ".fix-item");
+    function nextStep() {
+        currentStep = (currentStep + 1) % steps.length;
+        update3DCarousel();
     }
 
-    if (current.dataset.step === "automate") {
-        restartAnimation(current, ".automate-item");
-    }
-}
-
-
-function nextStep() {
-    currentStep++;
-
-    if (currentStep >= steps.length) {
-        currentStep = 0;
-    }
-
-    showStep();
-}
-
-
-showStep();
-
-setInterval(nextStep, 4000);
-
-function showStep() {
-    steps.forEach(step => {
-        step.classList.remove("active");
-    });
-
-    const current = steps[currentStep];
-
-    current.classList.add("active");
-
-    if (current.dataset.step === "build") {
-        restartAnimation(current, ".build-node");
-    }
-
-    if (current.dataset.step === "test") {
-        restartAnimation(current, ".test-item");
-    }
-
-    if (current.dataset.step === "fix") {
-        restartAnimation(current, ".fix-item");
-    }
-
-    if (current.dataset.step === "automate") {
-        restartAnimation(current, ".automate-item");
-    }
-}
-
-
-function nextStep(){
-    currentStep++;
-    
-    if (currentStep >= steps.length) {
-        currentStep = 0;
-    }
-
-    showStep();
-}
-
-setInterval(nextStep, 4000);
-
-showStep();
+    // Initialize initial 3D positions and set timer
+    update3DCarousel();
+    setInterval(nextStep, 4000);
+});

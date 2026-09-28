@@ -20,141 +20,85 @@
         </ul>
     </nav>
 
-    <main>
+<main>
     <section class="hero">
+        <!-- Left Column: Content -->
         <div class="hero-content">
-        <div class="intro">
-            <p>SOFTWARE ENGINEER</p>
-            <h1>I build. I fix. I automate.</h1>
-            <p>I help small businesses and individuals build, fix, and automate practical web and software solutions using modern
-            programming and development technologies.</p>
+            <div class="hero-image">
+                <img src="assets/images/heropic1.png" alt="Alan's Profile Picture">
+            </div>
+
+            <div class="intro">
+                <p class="tagline">SOFTWARE ENGINEER</p>
+                <h1>I build. I fix. I automate.</h1>
+                <p class="description">
+                    I help small businesses and individuals build, fix, and automate practical web and software
+                    solutions using modern programming and development technologies.
+                </p>
+            </div>
+
+            <div class="cta">
+                <a href="contact.html" class="btn btn-primary">Start a Project</a>
+                <a href="projects.html" class="btn btn-secondary">View My Work</a>
+            </div>
         </div>
 
-        <div class="cta">
-            <a href="contact.html" class="btn">Start a Project</a>
-            <a href="projects.html" class="btn">View My Work</a>
-        </div>
-    </div>
-
+        <!-- Right Column: Interactive Workflow Visual -->
         <div class="hero-visual">
-                
             <div class="workflow">
 
+                <!-- BUILD STEP -->
                 <div class="workflow-step" data-step="build">
-                
                     <h2>BUILD</h2>
-                
                     <div class="build-flow">
-                
-                        <div class="build-node build-1">
-                            <span>IDEA</span>
-                        </div>
-                
-                        <div class="build-connector">↓</div>
-                
-                        <div class="build-node build-2">
-                            <span>UI</span>
-                        </div>
-                
-                        <div class="build-connector">↓</div>
-                
-                        <div class="build-node build-3">
-                            <span>API</span>
-                        </div>
-                
-                        <div class="build-connector">↓</div>
-                
-                        <div class="build-node build-4">
-                            <span>DATABASE</span>
-                        </div>
-                
+                        <div class="build-node"><span>IDEA</span></div>
+                        <div class="connector">↓</div>
+                        <div class="build-node"><span>UI</span></div>
+                        <div class="connector">↓</div>
+                        <div class="build-node"><span>API</span></div>
+                        <div class="connector">↓</div>
+                        <div class="build-node"><span>DATABASE</span></div>
                     </div>
-                
                 </div>
-        
-                <div class="workflow-step" data-step="test">
-                
-                    <h2>TEST</h2>
-                
-                    <div class="test-flow">
-                
-                        <div class="test-item">
-                            <span>UNIT TESTS</span>
-                            <strong>✓</strong>
-                        </div>
-                
-                        <div class="test-item">
-                            <span>INTEGRATION</span>
-                            <strong>✓</strong>
-                        </div>
-                
-                        <div class="test-item">
-                            <span>VALIDATION</span>
-                            <strong>✓</strong>
-                        </div>
-                
-                    </div>
-                
-                </div>
-                
-                <div class="workflow-step" data-step="fix">
-                
-                    <h2>FIX</h2>
-                
-                    <div class="fix-flow">
-                
-                        <div class="fix-item fix-bug">
-                            <span>BUG DETECTED</span>
-                            <strong>!</strong>
-                        </div>
-                
-                        <div class="fix-connector">↓</div>
-                
-                        <div class="fix-item fix-debug">
-                            <span>DEBUGGING...</span>
-                        </div>
-                
-                        <div class="fix-connector">↓</div>
-                
-                        <div class="fix-item fix-done">
-                            <span>FIX APPLIED</span>
-                            <strong>✓</strong>
-                        </div>
-                
-                    </div>
-                
-                </div>
-        
-                <div class="workflow-step" data-step="automate">
-                
-                    <h2>AUTOMATE</h2>
-                
-                    <div class="automate-flow">
-                
-                        <div class="automate-item">
-                            <span>TRIGGER</span>
-                        </div>
-                
-                        <div class="automate-connector">↓</div>
-                
-                        <div class="automate-item">
-                            <span>PROCESS</span>
-                        </div>
-                
-                        <div class="automate-connector">↓</div>
-                
-                        <div class="automate-item">
-                            <span>DONE</span>
-                        </div>
-                
-                    </div>
-                
-                </div>
-        </div>
 
+                <!-- TEST STEP -->
+                <div class="workflow-step" data-step="test">
+                    <h2>TEST</h2>
+                    <div class="test-flow">
+                        <div class="test-item"><span>UNIT TESTS</span> <strong>✓</strong></div>
+                        <div class="test-item"><span>INTEGRATION</span> <strong>✓</strong></div>
+                        <div class="test-item"><span>VALIDATION</span> <strong>✓</strong></div>
+                    </div>
+                </div>
+
+                <!-- FIX STEP -->
+                <div class="workflow-step" data-step="fix">
+                    <h2>FIX</h2>
+                    <div class="fix-flow">
+                        <div class="fix-item fix-bug"><span>BUG DETECTED</span> <strong>!</strong></div>
+                        <div class="connector">↓</div>
+                        <div class="fix-item fix-debug"><span>DEBUGGING...</span></div>
+                        <div class="connector">↓</div>
+                        <div class="fix-item fix-done"><span>FIX APPLIED</span> <strong>✓</strong></div>
+                    </div>
+                </div>
+
+                <!-- AUTOMATE STEP -->
+                <div class="workflow-step" data-step="automate">
+                    <h2>AUTOMATE</h2>
+                    <div class="automate-flow">
+                        <div class="automate-item"><span>TRIGGER</span></div>
+                        <div class="connector">↓</div>
+                        <div class="automate-item"><span>PROCESS</span></div>
+                        <div class="connector">↓</div>
+                        <div class="automate-item"><span>DONE</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
-    
-    </main>
+</main>
     <script src="js/script.js"></script>
 </body>
 </html>
