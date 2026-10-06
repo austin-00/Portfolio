@@ -35,25 +35,31 @@ body {
     font-family: "Inter", sans-serif;
 }
 /* Navbar Container */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 2.5rem;
-    background-color: var(--surface);
-    border-bottom: 1px solid var(--border);
-}
+
+    .navbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+        padding: 20px clamp(20px, 4vw, 40px);
+    
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
 
 /* Logo (Left side) */
 .navbar .logo {
+    display: flex;
+    align-items: center;
+
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text-primary);
+
     text-decoration: none;
     transition: color 0.3s ease;
-    display: flex;
-        align-items: center;
-        text-decoration: none
 }
 .navbar .logo img {
     height: 40px;
@@ -79,19 +85,34 @@ body {
 
 /* Link Styling */
 .navbar .nav-links a {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 8px 12px;
+
     color: var(--text-secondary);
-    text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
-    padding: 0.5rem 0.75rem;
+
+    border: 1px solid transparent;
     border-radius: var(--radius-sm);
-    transition: all 0.3s ease;
+
+    transition:
+        color 0.25s ease,
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
 }
 
-/* Hover & Active States */
 .navbar .nav-links a:hover {
     color: var(--text-primary);
     background-color: var(--surface-light);
+    border-color: var(--border);
+
+    box-shadow: 0 0 18px rgba(124, 92, 255, 0.15);
+
+    transform: translateY(-1px);
 }
 
 /* Base Reset & Typography */
@@ -124,9 +145,9 @@ a {
     padding: clamp(40px, 8vh, var(--section-padding)) clamp(20px, 4vw, 40px);
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 45vw, 500px), 1fr));
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
     align-items: center;
-    gap: clamp(32px, 5vw, 80px);
+    gap: clamp(40px, 6vw, 80px);
 }
 
 /* Left Hero Content */
@@ -210,22 +231,6 @@ a {
     background-color: var(--surface-light);
 }
 
-/* ==========================================================================
-   Right Hero Visual (Fluid Workflow Cards)
-   ========================================================================== */
-
-/* ==========================================================================
-   3D Responsive & Fluid Workflow Grid
-   ========================================================================== */
-
-/* ==========================================================================
-   3D Responsive & Fluid Workflow Grid
-   ========================================================================== */
-
-/* ==========================================================================
-   3D Horizontal Rotating Slider (Stage Setup)
-   ========================================================================== */
-
 .hero-visual {
     width: 100%;
     display: flex;
@@ -240,9 +245,9 @@ a {
 .workflow {
     position: relative;
     width: 100%;
-    max-width: 380px;
+    max-width: 360px;
     /* Width of the main active card stage */
-    height: 380px;
+    height: 360px;
     /* Holds layout height stable during transitions */
     display: flex;
     justify-content: center;
@@ -294,7 +299,7 @@ a {
 
 /* Exiting Card (Rotates and fades into background left) */
 .workflow-step.prev {
-    opacity: 0.25;
+    opacity: 0;
     visibility: visible;
     z-index: 2;
     transform: translateZ(-180px) rotateY(35deg) translateX(-180px);
@@ -302,7 +307,7 @@ a {
 
 /* Incoming Card (Waiting in background right) */
 .workflow-step.next {
-    opacity: 0.25;
+    opacity: 0;
     visibility: visible;
     z-index: 2;
     transform: translateZ(-180px) rotateY(-35deg) translateX(180px);
@@ -321,29 +326,42 @@ a {
 .build-node,
 .test-item,
 .fix-item,
-.automate-item,
-.connector {
+.automate-item {
     background-color: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
+
     padding: clamp(8px, 1.2vw, 12px) clamp(10px, 1.5vw, 16px);
+
     font-size: clamp(0.75rem, 1vw, 0.85rem);
     font-weight: 600;
     color: var(--text-primary);
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     opacity: 0.2;
     transform: translateY(10px);
-    transition: all 0.3s ease;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        border-color 0.3s ease;
 }
 
 .connector {
-    background: transparent;
-    border: none;
-    padding: 2px;
+    display: flex;
     justify-content: center;
+    align-items: center;
+
+    padding: 2px 0;
+
     color: var(--text-secondary);
+    font-size: 18px;
+    line-height: 1;
+
+    opacity: 0.7;
 }
 
 /* Inner Nodes Animation (Triggered when card rotates to front) */
@@ -382,6 +400,259 @@ a {
     color: #5cff9d;
 }
 
+/* ================================
+   Contact Section
+================================ */
+
+.contact {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(80px, 10vh, 120px) clamp(20px, 4vw, 40px);
+}
+
+/* Contact Layout */
+
+.contact-container {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(40px, 6vw, 80px);
+}
+
+
+/* ================================
+   Contact Introduction
+================================ */
+
+.contact-intro {
+    max-width: 480px;
+}
+
+.contact-intro h2 {
+    margin: 0 0 18px;
+
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+
+    color: var(--text-primary);
+}
+
+.contact-intro p {
+    margin: 0;
+
+    max-width: 440px;
+
+    color: var(--text-secondary);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.7;
+}
+
+
+/* ================================
+   Contact Form Container
+================================ */
+
+.contact-form {
+    width: 100%;
+
+    padding: clamp(24px, 4vw, 36px);
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ================================
+   Form Layout
+================================ */
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* ================================
+   Labels
+================================ */
+
+.contact-form label {
+    color: var(--text-primary);
+
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+
+/* ================================
+   Inputs & Textarea
+================================ */
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    margin-top: -10px;
+
+    background: var(--bg);
+    color: var(--text-primary);
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+
+    font-family: inherit;
+    font-size: 0.95rem;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
+}
+
+
+/* Placeholder */
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+
+/* Focus State */
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--accent);
+
+    background: var(--surface-light);
+
+    box-shadow:
+        0 0 0 3px rgba(124, 92, 255, 0.12);
+}
+
+
+/* Textarea */
+
+.contact-form textarea {
+    min-height: 150px;
+
+    resize: vertical;
+}
+
+
+/* ================================
+   Submit Button
+================================ */
+
+.contact-form .btn {
+    align-self: flex-start;
+
+    margin-top: 4px;
+
+    border: none;
+    cursor: pointer;
+}
+/* =================================
+   Contact Entrance Animation
+================================= */
+
+.contact-intro,
+.contact-form {
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Left column starts slightly lower and smaller */
+.contact-intro {
+    transform: translateY(40px) scale(0.94);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Right column starts behind the left */
+.contact-form {
+    position: relative;
+    z-index: 1;
+
+    transform: translateX(-120px) scale(0.96);
+
+    transition:
+        opacity 0.8s ease,
+        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+
+    transition-delay: 0.25s;
+}
+
+/* Activated when Contact enters viewport */
+
+.contact.visible .contact-intro {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.contact.visible .contact-form {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+
+/* ================================
+   Mobile
+================================ */
+
+@media (max-width: 768px) {
+
+    .contact {
+        padding: 80px 20px;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .contact-intro {
+        max-width: 100%;
+    }
+
+    .contact-intro p {
+        max-width: 100%;
+    }
+
+    .contact-form {
+        padding: 24px;
+    }
+
+    .contact-form .btn {
+        width: 100%;
+    }
+
+        .contact-intro {
+            transform: translateY(30px) scale(0.97);
+        }
+    
+        .contact-form {
+            transform: translateY(30px);
+        }
+    
+        .contact.visible .contact-form {
+            transform: translateY(0);
+        }
+}
 /* ==========================================================================
    Keyframes
    ========================================================================== */
@@ -418,3 +689,22 @@ a {
         transform: translateZ(-150px) rotateY(-25deg) translateX(110px);
     }
 }
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-image {
+        justify-content: center;
+    }
+
+    .cta {
+        justify-content: center;
+    }
+
+    .hero-visual {
+        margin-top: 20px;
+    }
+}
+
