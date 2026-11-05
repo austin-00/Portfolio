@@ -1,15 +1,22 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv  # <-- Import this
+import dj_database_url # <-- Add this import
+from dotenv import load_dotenv
 
-# Load the .env file from the root folder (one level up from backend)
+# Load .env file for local development only
+# (Railway will use system environment variables directly)
 BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(os.path.join(BASE_DIR.parent, '.env'))
+env_path = os.path.join(BASE_DIR.parent, '.env')
+if os.path.exists(env_path):
+    load_dotenv(env_path)
 
 # --- SECURITY ---
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-fallback-key-for-build')
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')
+
+# Allow Railway's dynamic hostname or your custom domain
+# The '*' is for the initial deploy. Tighten this once you have your domain.
+ALLOWED_HOSTS = ['*']
 
 # --- APPS ---
 INSTALLED_APPS = [
@@ -25,6 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -33,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -52,69 +61,63 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-
+# --- DATABASE ---
+# Uses DATABASE_URL on Railway, falls back to SQLite locally
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
-
+# --- PASSWORD VALIDATION ---
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/6.1/topics/i18n/
-
+# --- INTERNATIONALIZATION ---
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.1/howto/static-files/
-
+# --- STATIC FILES ---
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR.parent, 'css'),
+    os.path.join(BASE_DIR.parent, 'js'),
+]
 
-# Email
-# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-
+# --- EMAIL ---
 MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
 
-# Add this at the bottom to tell Django where your frontend CSS is
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR.parent, 'css'),
-    os.path.join(BASE_DIR.parent, 'js'),
+# --- CORS & CSRF ---
+# Allow your frontend origins (Localhost + Railway domain)
+CORS_ALLOW_ALL_ORIGINS = True # Change this to CORS_ALLOWED_ORIGINS later
+
+# Trust requests coming from your frontend
+# Add the Railway domain after you deploy (e.g., 'https://your-app.up.railway.app')
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5500', # Local Live Server
+    'http://localhost:5500',
+    'https://*.up.railway.app', # Railway domain
+    'https://*.vercel.app',     # If you host frontend on Vercel
+    'https://*.netlify.app',    # If you host frontend on Netlify
 ]
 
-# Allow all origins during development (Change for production!)
-CORS_ALLOW_ALL_ORIGINS = True
+# --- PRODUCTION SECURITY (Only run these if DEBUG is False) ---
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
