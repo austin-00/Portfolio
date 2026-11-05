@@ -110,7 +110,7 @@ CORS_ALLOW_ALL_ORIGINS = True # Change this to CORS_ALLOWED_ORIGINS later
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:5500', # Local Live Server
     'http://localhost:5500',
-    'https://*.up.railway.app', # Railway domain
+    'https://portfolio-production-a709.up.railway.app', # Railway domain
     'https://*.vercel.app',     # If you host frontend on Vercel
     'https://*.netlify.app',    # If you host frontend on Netlify
 ]
