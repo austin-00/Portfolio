@@ -112,7 +112,8 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5500',
     'https://portfolio-production-a709.up.railway.app', # Railway domain
     'https://*.vercel.app',     # If you host frontend on Vercel
-    'https://*.netlify.app',    # If you host frontend on Netlify
+    'https://*.netlify.app', 
+    'https://austin-00.github.io',   # If you host frontend on Netlify
 ]
 
 # --- PRODUCTION SECURITY (Only run these if DEBUG is False) ---
