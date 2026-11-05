@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 0. Dynamic API Base URL Configuration
     // ==========================================
-    const BASE_URL = "http://127.0.0.1:8000";
+    const BASE_URL = "https://portfolio-production-a709.up.railway.app";
 
     // ==========================================
     // 1. Workflow Step Carousel (Shatter + Dust)
