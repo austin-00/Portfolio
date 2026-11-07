@@ -200,7 +200,6 @@ a {
     color: inherit;
     text-decoration: none;
 }
-
 /* ==========================================================================
    HERO SECTION
    ========================================================================== */
@@ -210,7 +209,8 @@ a {
     margin: 0 auto;
     padding: clamp(40px, 8vh, var(--section-padding)) clamp(20px, 4vw, 40px);
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
+    /* Fixed width allocation */
     align-items: center;
     gap: clamp(40px, 6vw, 80px);
 }
@@ -218,61 +218,30 @@ a {
 .hero-content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
     width: 100%;
 }
 
-.hero-image {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.hero-image img {
-    width: 100%;
-    max-width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 3px solid var(--accent);
-    object-fit: cover;
-    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
-}
-
-.intro .tagline {
-    color: var(--accent);
-    font-weight: 800;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-}
-
-.intro h1 {
-    font-size: clamp(2.2rem, 4vw, 3.25rem);
-    line-height: 1.15;
-    margin-bottom: 16px;
-}
-
-.intro .description {
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-}
-
-.cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 8px;
-}
-
+/* ==========================================================================
+   BUTTONS (Crucial - Added this so they don't break)
+   ========================================================================== */
 .btn {
-    padding: 12px 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
     border-radius: var(--radius-sm);
-    font-weight: 700;
-    text-align: center;
-    transition: all 0.3s ease;
-    flex: 0 1 auto;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
+    font-weight: 600;
     font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-family: inherit;
+}
+
+.btn svg {
+    margin-right: 8px;
 }
 
 .btn-primary {
@@ -297,6 +266,146 @@ a {
     background-color: var(--accent-light);
     color: var(--bg);
     box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+    transform: translateY(-2px);
+}
+
+.cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   HERO CONTENT UPGRADES (Profile, Badge, Text)
+   ========================================================================== */
+
+/* 1. Profile Picture Wrapper & Status Badge */
+.hero-image-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.hero-image {
+    position: relative;
+    display: flex;
+}
+
+.hero-image img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+    transform: scale(1.05);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+}
+
+.status-pulse {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* 2. Typography Upgrades */
+.intro h1 {
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* 3. Focus Tags (Pills) */
+.focus-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 4px 0;
+}
+
+.focus-tags span {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.focus-tags span:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(16, 185, 129, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 40px;
+    }
+
+    .hero-image-wrapper {
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .focus-tags,
+    .cta {
+        justify-content: center;
+    }
 }
 
 /* ==========================================================================

@@ -24,27 +24,54 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="hero" id="home">
-            <div class="hero-content">
-                <div class="hero-image">
-                    <img src="assets/images/profile.png" alt="Alan's Profile Picture">
-                </div>
-
-                <div class="intro">
-                    <p class="tagline">SOFTWARE ENGINEER</p>
-                    <h1>I build. I fix. I automate.</h1>
-                    <p class="description">
-                        I help small businesses and individuals build, fix, and automate practical web and software
-                        solutions using modern programming and development technologies.
-                    </p>
-                </div>
-
-                <div class="cta">
-                    <a href="#contact" class="btn btn-primary">Start a Project</a>
-                    <a href="#works" class="btn btn-secondary">View My Work</a>
-                </div>
-            </div>
-
+                <!-- HERO SECTION -->
+                <section class="hero" id="home">
+                    <!-- Left Column: Content -->
+                    <div class="hero-content">
+                
+                        <!-- Profile Picture with Status Ring -->
+                        <div class="hero-image-wrapper">
+                            <div class="hero-image">
+                                <img src="assets/images/profile.png" alt="Alan's Profile Picture">
+                            </div>
+                            <div class="status-badge">
+                                <span class="status-pulse"></span>
+                                Available for work
+                            </div>
+                        </div>
+                
+                        <!-- Intro Text -->
+                        <div class="intro">
+                            <p class="tagline">SOFTWARE ENGINEER</p>
+                            <h1>I build. I fix. <br><span class="gradient-text">I automate.</span></h1>
+                            <p class="description">
+                                I help small businesses and individuals build, fix, and automate practical web and software
+                                solutions using modern programming and development technologies.
+                            </p>
+                        </div>
+                
+                        <!-- Quick Focus Tags -->
+                        <div class="focus-tags">
+                            <span>Full-Stack Dev</span>
+                            <span>Python Automation</span>
+                            <span>UI/UX Design</span>
+                        </div>
+                
+                        <!-- Call to Action Buttons -->
+                        <div class="cta">
+                            <a href="#contact" class="btn btn-primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                                Start a Project
+                            </a>
+                            <a href="#works" class="btn btn-secondary">View My Work</a>
+                        </div>
+                    </div>
+                
+                    <!-- (Your Right Column / Workflow Visual remains here) -->
             <div class="hero-visual">
                 <div class="workflow">
                     <!-- BUILD STEP -->
@@ -435,22 +462,59 @@
     </div>
 
     <!-- PYTHON MODAL -->
-    <div id="python-modal" class="project-modal">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <h3>Python Automation Projects</h3>
-            <div class="project-list">
-                <div class="project-item">
-                    <div class="project-info">
-                        <h4>Web Scraper Bot</h4>
-                        <p>Automated scraping pipeline that extracts data and generates PDF reports.</p>
-                        <div class="project-tags"><span>Python</span><span>BeautifulSoup</span><span>Pandas</span></div>
+            <!-- PYTHON MODAL -->
+            <div id="python-modal" class="project-modal">
+                <div class="modal-content">
+                    <button class="modal-close">&times;</button>
+                    <h3>Python Automation Projects</h3>
+                    <div class="project-list">
+            
+                        <!-- PROJECT 1: Web Scraper -->
+                        <div class="project-item">
+                            <div class="project-info">
+                                <h4>File Organizer</h4>
+                                <p>Automated file management system that categorizes and organizes files based on their types and dates.</p>
+                                <div class="project-tags">
+                                    <span>Python</span>
+                                    <span>os</span>
+                                    <span>shutil</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/austin-00/File-organizer" class="btn btn-secondary">View Project</a>
+                        </div>
+            
+                        <!-- PROJECT 2: Task Automation API (NEW) -->
+                        <div class="project-item">
+                            <div class="project-info">
+                                <h4>Task Automation API</h4>
+                                <p>A FastAPI backend that handles scheduled automated tasks and sends webhook notifications.</p>
+                                <div class="project-tags">
+                                    <span>Python</span>
+                                    <span>FastAPI</span>
+                                    <span>Celery</span>
+                                </div>
+                            </div>
+                            <a href="https://github.com/yourusername/your-repo" target="_blank" class="btn btn-secondary">View
+                                Project</a>
+                        </div>
+            
+                        <!-- PROJECT 3: Data Pipeline (NEW) -->
+                        <div class="project-item">
+                            <div class="project-info">
+                                <h4>Automated Data Pipeline</h4>
+                                <p>Pulls data from multiple APIs, cleans it, and automatically updates a Google Sheet.</p>
+                                <div class="project-tags">
+                                    <span>Python</span>
+                                    <span>Requests</span>
+                                    <span>Google API</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-secondary">View Project</a>
+                        </div>
+            
                     </div>
-                    <a href="#" class="btn btn-secondary">View Project</a>
                 </div>
             </div>
-        </div>
-    </div>
 
     <script src="js/script.js"></script>
 </body>
