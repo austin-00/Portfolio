@@ -26,7 +26,7 @@ export default function Hero() {
       <div className="hero-content">
         <div className="hero-image-wrapper">
           <div className="hero-image">
-            <img src="/profile.png" alt="Alan's Profile" />
+            <img src={`${import.meta.env.BASE_URL}profile.png`} alt="Alan's Profile" />
           </div>
           <div className="status-badge">
             <span className="status-pulse"></span>

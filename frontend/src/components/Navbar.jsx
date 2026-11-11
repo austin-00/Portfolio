@@ -24,8 +24,7 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <a href="#home" className="logo">
-        {/* Assuming your logo is in frontend/public/assets/images/logo.png */}
-        <img src="/logo.png" alt="Alan Logo" />
+        <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Alan Logo" />
       </a>
 
       {/* Desktop Links */}
