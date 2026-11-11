@@ -1177,6 +1177,7 @@ a {
 .footer {
     background: rgba(6, 11, 9, 0.8);
     backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     border-top: 1px solid var(--glass-border);
     padding: 60px clamp(20px, 4vw, 40px) 20px;
 }
@@ -1195,6 +1196,7 @@ a {
 .footer-brand h2 {
     font-size: 2rem;
     margin-bottom: 12px;
+    color: var(--text-primary);
 }
 
 .footer-brand p {
@@ -1205,19 +1207,37 @@ a {
 .footer-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
-    max-width: 400px;
+    gap: 20px 32px;
+    /* Spacing between rows and columns */
+    max-width: 450px;
 }
 
 .footer-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    /* Space between icon and text */
     color: var(--text-secondary);
     font-size: 0.95rem;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+/* Styling the SVG icons */
+.footer-links a svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
 }
 
 .footer-links a:hover {
     color: var(--accent);
+}
+
+/* Slight bounce on icon hover */
+.footer-links a:hover svg {
+    transform: translateY(-3px) scale(1.1);
 }
 
 .footer-bottom {
@@ -1230,6 +1250,33 @@ a {
 
 .footer-bottom p {
     font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+    }
+
+    .footer-brand p {
+        margin: 0 auto;
+    }
+
+    .footer-links {
+        justify-content: center;
+        gap: 16px 24px;
+    }
+
+    .footer-links a {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 8px 16px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+    }
 }
 
 /* ==========================================================================
