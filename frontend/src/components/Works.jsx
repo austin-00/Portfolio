@@ -54,7 +54,9 @@ export default function Works() {
                       <div className="project-tags"><span>React</span><span>Django</span><span>PostgreSQL</span></div>
                     </div>
                     <a href="https://austin-00.github.io/DriveLux-Automotive-Rentals/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">View Project</a>
-                  <div className="project-info">
+                  </div>
+                  <div className="project-item">
+                    <div className="project-info">
                       <h4>Construction Site Website</h4>
                       <p>A responsive website for a construction company, built with HTML, CSS, and JavaScript.</p>
                       <div className="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
