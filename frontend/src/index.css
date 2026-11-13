@@ -1,31 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
 :root {
-  /* Colors - Midnight Emerald Theme */
-  --bg: #070e0b;
-  /* Very dark charcoal with a hint of green */
-  --surface: #0a1210;
-  /* Deep dark green surface */
-  --surface-light: #111c19;
-  /* Lighter surface for borders and hovers */
+  /* Colors - Ice Blue + Silver */
+  --bg: #060B14;
+  /* Very dark, cool blue-black */
+  --surface: #0b1221;
+  /* Slightly lighter surface */
+  --surface-light: #131d33;
 
-  --text-primary: #f0fdf4;
-  /* Crisp, cool off-white */
-  --text-secondary: #86a397;
-  /* Muted sage/emerald-gray for secondary text */
+  --text-primary: #F8FAFC;
+  /* Crisp white */
+  --text-secondary: #94A3B8;
+  /* Muted slate */
 
-  --accent: #10b981;
-  /* Vibrant Emerald Green */
-  --accent-light: #fbbf24;
-  /* Glowing Gold */
+  --accent: #60A5FA;
+  /* Primary Blue */
+  --accent-light: #E2E8F0;
+  /* Silver / Highlight */
 
-  --border: #182a24;
-  /* Deep green border */
+  --border: #1e293b;
+  /* Dark slate border */
 
   /* Glassmorphism (Dark Mode) */
-  --glass-bg: rgba(10, 18, 16, 0.45);
-  --glass-border: rgba(16, 185, 129, 0.15);
+  --glass-bg: rgba(11, 18, 33, 0.4);
+  --glass-border: rgba(96, 165, 250, 0.15);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  --glass-blur: blur(16px);
+  --glass-blur: blur(16px) saturate(140%);
 
   /* Spacing & Radius */
   --section-padding: 100px;
@@ -44,7 +44,6 @@ html {
 
 body {
   margin: 0;
-  /* IMPORTANT: Make body background transparent so the glow orbs show through */
   background-color: transparent;
   color: var(--text-primary);
   font-family: "Inter", sans-serif;
@@ -53,7 +52,9 @@ body {
   min-height: 100vh;
 }
 
-/* Base background layer */
+/* ==========================================================================
+   BACKGROUND & ORBS (Ice Blue & Cyan)
+   ========================================================================== */
 body::after {
   content: '';
   position: fixed;
@@ -65,9 +66,7 @@ body::after {
   z-index: -2;
 }
 
-/* ==========================================================================
-   BACKGROUND ORBS (Emerald & Gold Glows)
-   ========================================================================== */
+/* Orb 1: Blue */
 body::before {
   content: '';
   position: fixed;
@@ -75,18 +74,31 @@ body::before {
   filter: blur(120px);
   z-index: -1;
   pointer-events: none;
-
-  /* Positioning the orb */
-  top: 20%;
-  left: 20%;
+  top: -10%;
+  left: -10%;
   width: 60vw;
   height: 60vw;
-  background: rgba(16, 185, 129, 0.15);
-  /* Emerald glow */
+  background: rgba(29, 78, 216, 0.25);
+  /* #1D4ED8 */
   animation: orbFloat 15s ease-in-out infinite alternate;
 }
 
-/* Add a second orb using a wrapper in the HTML, or we can simulate it here */
+/* Orb 2: Cyan */
+.orb-2 {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  pointer-events: none;
+  bottom: -10%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: rgba(8, 145, 178, 0.25);
+  /* #0891B2 */
+  animation: orbFloat 18s ease-in-out infinite alternate-reverse;
+}
 
 @keyframes orbFloat {
   0% {
@@ -125,10 +137,20 @@ body::before {
   transition: background 0.3s ease;
 }
 
+/* Fake light hitting the top edge */
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
 .navbar.scrolled {
-  background: rgba(10, 18, 16, 0.8);
-  /* Darker glass, still transparent */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(6, 11, 20, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .navbar .logo {
@@ -138,8 +160,7 @@ body::before {
   font-weight: 700;
   color: var(--text-primary);
   text-decoration: none;
-  /* Add a constant emerald glow around the logo */
-  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.6));
   transition: filter 0.3s ease;
 }
 
@@ -151,8 +172,7 @@ body::before {
 }
 
 .navbar .logo:hover {
-  /* Make it slightly brighter on hover */
-  filter: drop-shadow(0 0 15px rgba(16, 185, 129, 1));
+  filter: drop-shadow(0 0 15px rgba(96, 165, 250, 1));
 }
 
 .navbar .nav-links {
@@ -178,12 +198,9 @@ body::before {
 
 .navbar .nav-links a:hover {
   color: var(--accent-light);
-  /* Make text turn gold */
-  background-color: rgba(16, 185, 129, 0.1);
-  /* Slight emerald tint background */
+  background-color: rgba(96, 165, 250, 0.1);
   border-color: var(--accent);
-  /* Much stronger, wider glow */
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.5), inset 0 0 10px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 25px rgba(96, 165, 250, 0.3), inset 0 0 10px rgba(96, 165, 250, 0.1);
   transform: translateY(-1px);
 }
 
@@ -219,7 +236,6 @@ a {
   padding: clamp(40px, 8vh, var(--section-padding)) clamp(20px, 4vw, 40px);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* Fixed width allocation */
   align-items: center;
   gap: clamp(40px, 6vw, 80px);
 }
@@ -232,7 +248,7 @@ a {
 }
 
 /* ==========================================================================
-   BUTTONS (Crucial - Added this so they don't break)
+   BUTTONS
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -254,14 +270,14 @@ a {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), #059669);
+  background: linear-gradient(135deg, var(--accent), #1D4ED8);
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #34d399, var(--accent));
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #93C5FD, var(--accent));
+  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.5);
   transform: translateY(-2px);
 }
 
@@ -274,7 +290,7 @@ a {
 .btn-secondary:hover {
   background-color: var(--accent-light);
   color: var(--bg);
-  box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
+  box-shadow: 0 0 15px rgba(226, 232, 240, 0.3);
   transform: translateY(-2px);
 }
 
@@ -286,10 +302,8 @@ a {
 }
 
 /* ==========================================================================
-   HERO CONTENT UPGRADES (Profile, Badge, Text)
+   HERO CONTENT UPGRADES
    ========================================================================== */
-
-/* 1. Profile Picture Wrapper & Status Badge */
 .hero-image-wrapper {
   display: flex;
   align-items: center;
@@ -307,7 +321,7 @@ a {
   border-radius: 50%;
   border: 3px solid var(--accent);
   object-fit: cover;
-  box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 25px rgba(96, 165, 250, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -319,8 +333,8 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(96, 165, 250, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.3);
   padding: 8px 16px;
   border-radius: 50px;
   font-size: 0.85rem;
@@ -334,28 +348,27 @@ a {
   height: 8px;
   background-color: var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7);
   animation: pulse-ring 2s infinite;
 }
 
 @keyframes pulse-ring {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.7);
   }
 
   70% {
     transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    box-shadow: 0 0 0 10px rgba(96, 165, 250, 0);
   }
 
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    box-shadow: 0 0 0 0 rgba(96, 165, 250, 0);
   }
 }
 
-/* 2. Typography Upgrades */
 .intro h1 {
   font-size: clamp(2.5rem, 5vw, 3.8rem);
   line-height: 1.1;
@@ -371,7 +384,6 @@ a {
   color: transparent;
 }
 
-/* 3. Focus Tags (Pills) */
 .focus-tags {
   display: flex;
   flex-wrap: wrap;
@@ -393,11 +405,10 @@ a {
 .focus-tags span:hover {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(16, 185, 129, 0.05);
+  background: rgba(96, 165, 250, 0.05);
   transform: translateY(-2px);
 }
 
-/* Mobile Adjustments */
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
@@ -446,7 +457,11 @@ a {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  /* Light hitting top and left edges */
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: clamp(16px, 2.5vw, 24px);
   display: flex;
@@ -467,9 +482,7 @@ a {
   z-index: 10;
   clip-path: inset(0% 0% 0% 0% round var(--radius-lg));
   border-color: var(--accent);
-  box-shadow:
-    0 20px 45px -10px rgba(16, 185, 129, 0.3),
-    0 0 25px rgba(251, 191, 36, 0.1);
+  box-shadow: 0 20px 45px -10px rgba(96, 165, 250, 0.3), 0 0 25px rgba(226, 232, 240, 0.1);
   animation: frontCardFloat 4s ease-in-out infinite alternate;
 }
 
@@ -502,8 +515,7 @@ a {
 .test-item,
 .fix-item,
 .automate-item {
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Darker glass for contrast */
+  background-color: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: clamp(8px, 1.2vw, 12px) clamp(10px, 1.5vw, 14px);
@@ -548,10 +560,9 @@ a {
   opacity: 0.3;
 }
 
-/* Specific Nodes */
 .build-node:hover {
   border-color: var(--accent);
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 15px rgba(96, 165, 250, 0.2);
 }
 
 .status-dot {
@@ -576,7 +587,7 @@ a {
 
 .fix-done,
 .success-item {
-  border-color: rgba(16, 185, 129, 0.5);
+  border-color: rgba(96, 165, 250, 0.5);
 }
 
 .animate {
@@ -619,7 +630,7 @@ a {
 }
 
 .dust-particle.dark {
-  background: #059669;
+  background: #1D4ED8;
 }
 
 .dust-particle.light {
@@ -701,7 +712,10 @@ a {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: clamp(24px, 4vw, 36px);
   box-shadow: var(--glass-shadow);
@@ -730,7 +744,7 @@ a {
   justify-content: center;
   gap: 12px;
   padding: 24px 16px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -755,7 +769,7 @@ a {
   border-color: var(--accent);
   background: var(--surface-light);
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 10px 20px rgba(96, 165, 250, 0.15);
 }
 
 .skill-card:hover svg {
@@ -850,7 +864,10 @@ a {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: clamp(24px, 4vw, 36px);
   cursor: pointer;
@@ -863,7 +880,7 @@ a {
 .category-icon {
   width: 48px;
   height: 48px;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(96, 165, 250, 0.1);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
@@ -891,7 +908,7 @@ a {
 .category-card:hover {
   border-color: var(--accent);
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 15px 35px rgba(96, 165, 250, 0.15);
   background: var(--surface-light);
 }
 
@@ -909,7 +926,7 @@ a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(6, 11, 9, 0.85);
+  background: rgba(6, 11, 20, 0.85);
   backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
@@ -1012,10 +1029,10 @@ a {
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--accent);
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(96, 165, 250, 0.1);
   padding: 4px 10px;
   border-radius: 20px;
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(96, 165, 250, 0.2);
 }
 
 .project-item .btn {
@@ -1061,14 +1078,15 @@ a {
 .contact-form {
   width: 100%;
   padding: clamp(24px, 4vw, 36px);
-  background: rgba(10, 18, 16, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: rgba(11, 18, 33, 0.65);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(96, 165, 250, 0.25);
+  border-bottom: 1px solid rgba(96, 165, 250, 0.25);
   border-radius: var(--radius-lg);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-
-  /* Required for the glow to position correctly */
   position: relative;
   z-index: 1;
 }
@@ -1081,7 +1099,7 @@ a {
   left: -10px;
   right: -10px;
   bottom: -10px;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(251, 191, 36, 0.2));
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.4), rgba(29, 78, 216, 0.2));
   filter: blur(40px);
   border-radius: calc(var(--radius-lg) + 10px);
   z-index: -1;
@@ -1120,7 +1138,7 @@ a {
   margin-top: -10px;
   background: rgba(0, 0, 0, 0.2);
   color: var(--text-primary);
-  border: 1px solid rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(96, 165, 250, 0.15);
   border-radius: var(--radius-sm);
   font-family: inherit;
   font-size: 0.95rem;
@@ -1137,8 +1155,8 @@ a {
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--accent);
-  background: rgba(16, 185, 129, 0.05);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  background: rgba(96, 165, 250, 0.05);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
 }
 
 .contact-form textarea {
@@ -1151,7 +1169,7 @@ a {
   margin-top: 4px;
 }
 
-/* Entrance Animations (Ensure transform doesn't break the glow) */
+/* Entrance Animations */
 .contact-intro,
 .contact-form {
   opacity: 0;
@@ -1163,7 +1181,6 @@ a {
   transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Important: We removed the translateX from the form to prevent layout glitches with the glow */
 .contact-form {
   transform: translateY(40px) scale(0.96);
   transition: opacity 0.8s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1184,7 +1201,7 @@ a {
    FOOTER
    ========================================================================== */
 .footer {
-  background: rgba(6, 11, 9, 0.8);
+  background: rgba(6, 11, 20, 0.8);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-top: 1px solid var(--glass-border);
@@ -1217,7 +1234,6 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 20px 32px;
-  /* Spacing between rows and columns */
   max-width: 450px;
 }
 
@@ -1225,7 +1241,6 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  /* Space between icon and text */
   color: var(--text-secondary);
   font-size: 0.95rem;
   font-weight: 500;
@@ -1233,7 +1248,6 @@ a {
   text-decoration: none;
 }
 
-/* Styling the SVG icons */
 .footer-links a svg {
   width: 18px;
   height: 18px;
@@ -1244,7 +1258,6 @@ a {
   color: var(--accent);
 }
 
-/* Slight bounce on icon hover */
 .footer-links a:hover svg {
   transform: translateY(-3px) scale(1.1);
 }
@@ -1262,7 +1275,6 @@ a {
   color: var(--text-secondary);
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;
