@@ -49,11 +49,11 @@ export default function Works() {
                 <div className="project-list">
                   <div className="project-item">
                     <div className="project-info">
-                      <h4>E-Commerce Platform</h4>
-                      <p>A full-stack store with Stripe integration, built with Django and React.</p>
+                      <h4>DriveLux Automotive Rentals</h4>
+                      <p>A car rental website built with React and Django.</p>
                       <div className="project-tags"><span>React</span><span>Django</span><span>PostgreSQL</span></div>
                     </div>
-                    <a href="#" className="btn btn-secondary">View Project</a>
+                    <a href="https://austin-00.github.io/DriveLux-Automotive-Rentals/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">View Project</a>
                   </div>
                 </div>
               </>
