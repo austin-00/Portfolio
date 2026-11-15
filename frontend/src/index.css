@@ -36,7 +36,9 @@ body {
    HERO WRAPPER & FRAME
    ========================================================================== */
 .hero-wrapper {
+  width: 100%;
   min-height: 100vh;
+  /* Fills the whole screen */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,11 +49,10 @@ body {
   width: 100%;
   max-width: 1400px;
   height: 85vh;
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-  position: relative;
+  /* Fixed height */
   overflow: hidden;
+  /* Prevents content from spilling out */
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -166,8 +167,9 @@ body {
   min-height: 0;
   padding: 0 3rem 2rem 3rem;
   align-items: stretch;
+  overflow: hidden;
+  /* CRITICAL: Prevents children from escaping */
 }
-
 /* 1. TEXT */
 .hero-text-left {
   display: flex;
@@ -214,21 +216,65 @@ body {
 }
 
 /* 2. PORTRAIT */
+/* 2. PORTRAIT */
+/* 2. PORTRAIT */
 .portrait-container {
   height: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
+  position: relative;
+  padding-top: 1rem;
+  /* CRITICAL: Creates a stacking context for z-index to work correctly */
+  z-index: 1;
 }
 
 .portrait-image {
   height: 100%;
   width: auto;
   max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  object-position: bottom;
+  object-position: top;
+  position: relative;
+  /* CRITICAL: Forces image to the very top */
+  z-index: 10;
   mask-image: linear-gradient(to top, transparent 0%, black 15%);
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
+}
+
+/* Name tag BEHIND the portrait */
+.portrait-label {
+  position: absolute;
+  top: 20%;
+  /* Adjust this to move the text up/down behind your body */
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* RESPONSIVE GAP: Scales with the screen width */
+    gap: clamp(20px, 15vw, 200px);
+
+  /* CRITICAL: Forces text behind the image */
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+
+  /* Makes it look like a faded background element */
+  opacity: 0.2;
+}
+
+.portrait-label span {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 8vw, 8rem);
+  /* HUGE text to stretch past your shoulders */
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: 2px;
+  line-height: 1;
 }
 
 /* 3. CARD */
@@ -238,6 +284,9 @@ body {
   align-items: flex-end;
   padding-bottom: 1rem;
   perspective: 1000px;
+  /* Ensure the wrapper doesn't overflow the grid column */
+  width: 100%;
+    height: 100%;
 }
 
 .hero-card-right {
@@ -253,6 +302,9 @@ body {
   flex-direction: column;
   justify-content: center;
   transform-style: preserve-3d;
+/* Ensure the card doesn't overflow its container on smaller desktops */
+  max-height: 100%;
+    overflow: hidden;
 }
 
 .card-icon {
@@ -265,6 +317,8 @@ body {
   justify-content: center;
   color: var(--accent);
   margin-bottom: 1.5rem;
+  flex-shrink: 0;
+    /* Prevents icon from shrinking */
 }
 
 .hero-card-right h3 {
@@ -280,6 +334,8 @@ body {
   color: #94a3b8;
   line-height: 1.5;
   margin: 0;
+    /* Allow text to scale down on smaller screens */
+      overflow-wrap: break-word;
 }
 
 /* ==========================================================================
@@ -297,19 +353,43 @@ body {
   }
 
   .hero-nav {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
     flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: space-between;
+    gap: 0.75rem;
+    justify-content: center;
   }
 
   .nav-menu {
-    display: none;
+    display: flex;
+    gap: 1rem;
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-menu li a {
+    font-size: 0.8rem;
+    padding: 6px 10px;
   }
 
   .nav-left {
-    width: 100%;
-    justify-content: space-between;
+    width: auto;
+    gap: 8px;
+  }
+
+  .nav-availability {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+  }
+
+  .nav-logo {
+    height: 28px;
+  }
+
+  .btn-talk {
+    padding: 8px 16px;
+    font-size: 0.8rem;
   }
 
   .hero-grid {
@@ -319,19 +399,26 @@ body {
     align-items: center;
   }
 
+  /* REORDER: Portrait first, then text, then card */
+  .portrait-container {
+    order: -1;
+    height: 320px;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 0;
+    overflow: hidden;
+  }
+
   .hero-text-left {
+    order: 1;
     text-align: center;
     padding-bottom: 0;
-    margin-top: 2rem;
+    margin-top: 0;
     justify-content: flex-start;
   }
 
-  .portrait-container {
-    height: 300px;
-    justify-content: center;
-  }
-
   .hero-card-right-wrapper {
+    order: 2;
     justify-content: center;
     padding-bottom: 0;
   }
@@ -973,53 +1060,7 @@ body {
   transform: translateY(-2px);
 }
 
-/* ==========================================================================
-   MOBILE RESPONSIVENESS
-   ========================================================================== */
-@media (max-width: 1024px) {
-  .hero-frame {
-    height: auto;
-    min-height: 90vh;
-    padding-bottom: 2rem;
-  }
 
-  .hero-nav {
-    padding: 1.5rem;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .nav-menu {
-    display: none;
-  }
-
-  .portrait-container {
-    height: 50%;
-    opacity: 0.9;
-  }
-
-  .hero-text-left {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    padding: 2rem;
-    max-width: 100%;
-    text-align: center;
-    margin-top: 350px;
-  }
-
-  .hero-text-left h1 {
-    font-size: 2rem;
-  }
-
-  .hero-card-right {
-    position: relative;
-    bottom: 0;
-    right: 0;
-    margin: 0 auto 2rem;
-    width: 90%;
-  }
-}
 
 @media (max-width: 900px) {
 

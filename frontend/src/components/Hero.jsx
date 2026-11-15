@@ -62,7 +62,14 @@ export default function Hero() {
 
           {/* COLUMN 2: PORTRAIT */}
           <motion.div className="portrait-container" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
-            <img src={`${import.meta.env.BASE_URL}portrait.png`} alt="Alan" className="portrait-image" />
+            
+            {/* NAME LABEL BEHIND THE PORTRAIT */}
+            <div className="portrait-label">
+              <span>Alan</span>
+              <span>Austin</span>
+            </div>
+
+            <img src={`${import.meta.env.BASE_URL}portrait_studio_cutout_4k.png`} alt="Alan" className="portrait-image" />
           </motion.div>
 
           {/* COLUMN 3: CARD */}
