@@ -1,4 +1,3 @@
-import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Works from './components/Works';
@@ -8,10 +7,6 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div>
-      {/* Cyan background orb for glassmorphism */}
-      <div className="orb-2"></div>
-      
-      <Navbar />
       <main>
         <Hero />
         <About />
