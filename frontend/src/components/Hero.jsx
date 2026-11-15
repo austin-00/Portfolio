@@ -29,7 +29,7 @@ export default function Hero() {
     <div className="hero-wrapper">
       <div className="hero-frame">
         
-        {/* NAVIGATION */}
+        {/* NAVIGATION (Top) */}
         <nav className="hero-nav">
           <div className="nav-left">
             <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Logo" className="nav-logo" />
@@ -50,32 +50,32 @@ export default function Hero() {
           </a>
         </nav>
 
-        {/* NEW WRAPPER FOR MOBILE SIDE-BY-SIDE LAYOUT */}
-        <div className="hero-mobile-row">
+        {/* THE 3-COLUMN GRID */}
+        <div className="hero-grid">
           
-          {/* CENTRAL PORTRAIT */}
-          <motion.div className="portrait-container" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
-            <img src={`${import.meta.env.BASE_URL}portrait.png`} alt="Alan" className="portrait-image" />
-          </motion.div>
-
-          {/* FLOATING TEXT */}
+          {/* COLUMN 1: TEXT */}
           <motion.div className="hero-text-left" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
             <h1>Software Engineer</h1>
             <p>Designing digital products that are clear, usable, and conversion-focused. I bridge the gap between design and engineering.</p>
             <a href="#contact" className="btn-collaborate">Let's collaborate <ArrowUpRight size={16} /></a>
           </motion.div>
 
-        </div>
+          {/* COLUMN 2: PORTRAIT */}
+          <motion.div className="portrait-container" initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: "easeOut" }}>
+            <img src={`${import.meta.env.BASE_URL}portrait.png`} alt="Alan" className="portrait-image" />
+          </motion.div>
 
-        {/* ANIMATED WORKFLOW CARD */}
-        <div className="hero-card-right-wrapper">
-          <AnimatePresence mode="wait">
-            <motion.div key={activeStep} variants={cardVariants} initial="enter" animate="center" exit="exit" className="hero-card-right">
-              <div className="card-icon">{steps[activeStep].icon}</div>
-              <h3>{steps[activeStep].title}</h3>
-              <p>{steps[activeStep].desc}</p>
-            </motion.div>
-          </AnimatePresence>
+          {/* COLUMN 3: CARD */}
+          <div className="hero-card-right-wrapper">
+            <AnimatePresence mode="wait">
+              <motion.div key={activeStep} variants={cardVariants} initial="enter" animate="center" exit="exit" className="hero-card-right">
+                <div className="card-icon">{steps[activeStep].icon}</div>
+                <h3>{steps[activeStep].title}</h3>
+                <p>{steps[activeStep].desc}</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
 
       </div>
