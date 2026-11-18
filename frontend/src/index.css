@@ -40,7 +40,7 @@ body {
   top: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 95%;
   max-width: 1200px;
   display: flex;
   align-items: center;
@@ -204,30 +204,34 @@ body {
   justify-content: center;
   position: relative;
   z-index: 5;
-  overflow: hidden;
+  /* FIX #2: allow the train to bleed wider than this column.
+     The parent .hero-glass-wrapper already has overflow:hidden +
+     border-radius, so the train is still clipped to the rounded card. */
+  overflow: visible;
 }
 
-/* Taller train wrapper to match navbar height */
+/* FIX #2: wider horizontally — pulled outside the column on both sides.
+   The mask-image still fades the new edges, and the upper band sits
+   above the bottom-aligned text, so readability is preserved. */
 .project-train-wrapper {
   position: absolute;
   top: 15%;
-  left: 0;
-  width: 100%;
+  left: -25%;
+  width: 150%;
   height: 300px;
-  /* Increased from 180px */
   overflow: hidden;
   z-index: 0;
   pointer-events: none;
   mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
-  opacity: 5;
+  opacity: 0.35;
+  /* BUG FIX: was `opacity: 5` (invalid, ignored by browser) */
 }
 
 .project-train {
   display: flex;
   gap: 16px;
   height: 100%;
-
   animation: slideTrain 10s linear infinite;
   will-change: transform;
 }
@@ -236,7 +240,6 @@ body {
   height: 100%;
   width: auto;
   min-width: 450px;
-  /* Wider images to match taller height */
   object-fit: cover;
   border-radius: var(--radius-md);
   flex-shrink: 0;
@@ -253,7 +256,6 @@ body {
   }
 }
 
-/* Portrait image stays in front */
 .portrait-image-wrapper {
   height: 100%;
   width: 100%;
@@ -286,17 +288,13 @@ body {
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
 }
 
-/* 3. EMPTY SPACER
-.hero-right-spacer {
-  display: block;
-}*/
-
 /* ==========================================================================
-   HERO BADGE - Bottom Right of Hero Glass Wrapper
+   HERO BADGE — now TOP RIGHT (desktop)
    ========================================================================== */
 .hero-status-badge {
   position: absolute;
-  bottom: 2rem;
+  top: 2rem;
+  /* FIX #1: was bottom: 2rem */
   right: 2rem;
   z-index: 30;
   display: inline-flex;
@@ -367,21 +365,32 @@ body {
     min-height: auto;
   }
 
-  .hero-right-spacer {
-    display: none;
-  }
-
   .portrait-container {
     order: -1;
+    /* portrait on top */
     height: 350px;
     min-height: auto;
     justify-content: center;
     align-items: flex-start;
   }
 
+  /* FIX #1 (mobile): badge leaves absolute positioning and flows into the
+     grid. With portrait = order -1, badge = order 0, text = order 1,
+     the badge lands directly BELOW the portrait image. */
+  .hero-status-badge {
+    position: static;
+    order: 0;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 0.7rem;
+    padding: 6px 12px;
+  }
+
   .project-train-wrapper {
     height: 180px;
     top: 10%;
+    left: -15%;
+    width: 130%;
     opacity: 0.2;
   }
 
@@ -397,36 +406,69 @@ body {
     max-width: 100%;
     align-items: center;
   }
-
-  /* Badge stays at bottom right of hero-glass-wrapper */
-  .hero-status-badge {
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 0.7rem;
-    padding: 6px 12px;
-  }
 }
+
 /* ==========================================================================
    ABOUT SECTION (Light Theme + Glass)
    ========================================================================== */
 .about {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: clamp(80px, 10vh, 120px) clamp(20px, 4vw, 40px);
-  border-top: 1px solid var(--border);
+  padding: 0 clamp(16px, 4vw, 40px);
 }
 
-.about-container {
+.about-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0 4rem 0;
+}
+
+.about-glass-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 85vh;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.about-frame {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  flex: 1;
+}
+
+/* TWO-COLUMN GRID */
+.about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: clamp(40px, 6vw, 80px);
+  width: 100%;
+  flex: 1;
+  min-height: 500px;
+  padding: 3rem;
+  align-items: stretch;
+  gap: 0;
 }
 
+/* COLUMN 1: BIO */
 .about-content {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-right: 3rem;
+  border-right: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .section-tagline {
@@ -441,24 +483,27 @@ body {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   line-height: 1.15;
   color: var(--text-primary);
+  margin-top: 1rem;
 }
 
 .about-text p {
   margin-bottom: 16px;
   font-size: clamp(0.95rem, 1.5vw, 1.05rem);
   color: var(--text-secondary);
+  line-height: 1.7;
 }
 
-.about-text strong {
+.about-text p strong {
   color: var(--text-primary);
+  font-weight: 600;
 }
 
 .about-stats {
   display: flex;
   gap: 32px;
-  margin-top: 16px;
+  margin-top: auto;
   padding-top: 24px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .stat-item {
@@ -477,36 +522,16 @@ body {
   font-size: 0.85rem;
   color: var(--text-secondary);
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Glassmorphism with Light Theme Glow */
+/* COLUMN 2: TECH STACK */
 .about-skills {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border-top: 1px solid var(--glass-border);
-  border-left: 1px solid var(--glass-border);
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: clamp(24px, 4vw, 36px);
-  box-shadow: var(--glass-shadow);
-  overflow: visible;
+  padding: 3rem;
+  padding-left: 3rem;
+  display: flex;
+  flex-direction: column;
   position: relative;
-}
-
-/* Glow behind skills box */
-.about-skills::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  right: -20px;
-  bottom: -20px;
-  background: radial-gradient(circle at top left, rgba(96, 165, 250, 0.15), transparent 70%);
-  z-index: -1;
-  pointer-events: none;
-  border-radius: inherit;
 }
 
 .skills-title {
@@ -514,14 +539,17 @@ body {
   letter-spacing: 2px;
   color: var(--text-secondary);
   margin-bottom: 24px;
-  border-bottom: 1px solid var(--border);
   padding-bottom: 12px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  font-weight: 600;
 }
 
 .skills-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  flex: 1;
+  align-content: center;
 }
 
 .skill-card {
@@ -530,9 +558,9 @@ body {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 24px 16px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  padding: 28px 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.8);
   border-radius: var(--radius-md);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
@@ -554,13 +582,85 @@ body {
 
 .skill-card:hover {
   border-color: var(--accent-blue);
-  background: var(--surface-light);
+  background: rgba(255, 255, 255, 1);
   transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(96, 165, 250, 0.15);
 }
 
 .skill-card:hover svg {
   transform: scale(1.15);
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 968px) {
+  .about {
+    padding: 0 16px;
+  }
+
+  .about-wrapper {
+    padding: 1rem 0 3rem 0;
+  }
+
+  .about-glass-wrapper {
+    min-height: auto;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .about-content {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    padding-bottom: 2rem;
+  }
+
+  .about-skills {
+    padding: 0;
+    padding-top: 1rem;
+  }
+
+  .about-stats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .about {
+    padding: 0 12px;
+  }
+
+  .about-wrapper {
+    padding: 0.5rem 0 2rem 0;
+  }
+
+  .about-grid {
+    padding: 1.5rem 1rem;
+  }
+
+  .about-title {
+    font-size: 1.8rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats {
+    gap: 16px;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
 }
 
 /* ==========================================================================

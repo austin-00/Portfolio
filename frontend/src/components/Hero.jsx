@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -36,8 +35,6 @@ export default function Hero() {
 
             {/* COLUMN 2: PORTRAIT + MOVING SCREENSHOT TRAIN */}
             <div className="portrait-container">
-              
-              {/* Continuous horizontal scrolling train behind the portrait */}
               <div className="project-train-wrapper">
                 <div className="project-train">
                   {[...projects, ...projects].map((src, index) => (
@@ -51,7 +48,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Portrait image */}
               <div className="portrait-image-wrapper">
                 <motion.div
                   className="portrait-motion-wrapper"
@@ -68,22 +64,18 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* COLUMN 3: EMPTY SPACER */}
-            <div className="hero-right-spacer"></div>
+            {/* Availability Badge */}
+            <motion.div
+              className="hero-status-badge"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <span className="dot-green"></span>
+              Available for New Project
+            </motion.div>
 
           </div>
-
-          {/* Availability Badge - Bottom Right of Hero Wrapper */}
-          <motion.div
-            className="hero-status-badge"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <span className="dot-green"></span>
-            Available for New Project
-          </motion.div>
-
         </div>
       </div>
     </div>
