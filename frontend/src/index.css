@@ -33,74 +33,43 @@ body {
 }
 
 /* ==========================================================================
-   HERO WRAPPER & FRAME
+   NAVBAR
    ========================================================================== */
-.hero-wrapper {
-  width: 100%;
-  min-height: 100vh;
-  /* Fills the whole screen */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.hero-frame {
-  width: 100%;
-  max-width: 1400px;
-  height: 85vh;
-  /* Fixed height */
-  overflow: hidden;
-  /* Prevents content from spilling out */
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ==========================================================================
-   NAVIGATION
-   ========================================================================== */
-.hero-nav {
+.navbar {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 3rem;
-  z-index: 20;
-  flex-shrink: 0;
+  padding: 1rem 2.5rem;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12);
 }
 
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 16px;
 }
 
 .nav-logo {
-  height: 36px;
+  height: 32px;
   width: auto;
   object-fit: contain;
-}
-
-.nav-availability {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: var(--surface);
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--border);
-}
-
-.dot-green {
-  width: 8px;
-  height: 8px;
-  background-color: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
 }
 
 .nav-menu {
@@ -112,12 +81,10 @@ body {
 }
 
 .nav-menu li a {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
   text-decoration: none;
-  display: flex;
-  gap: 4px;
   padding: 8px 16px;
   border-radius: 50px;
   transition: all 0.3s ease;
@@ -129,31 +96,40 @@ body {
   color: var(--accent-blue);
 }
 
-.nav-menu li span {
-  color: var(--text-secondary);
-  font-size: 0.75rem;
-  font-weight: 400;
-  margin-top: 2px;
-}
-
-.btn-talk {
-  background: var(--surface-dark);
-  color: #ffffff;
-  padding: 10px 24px;
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-  font-size: 0.9rem;
+/* ==========================================================================
+   HERO WRAPPER & FRAME
+   ========================================================================== */
+.hero-wrapper {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  gap: 8px;
-  border: none;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  justify-content: center;
+  padding: 6rem 2rem 2rem 2rem;
 }
 
-.btn-talk:hover {
-  transform: translateY(-2px);
+.hero-glass-wrapper {
+  position: relative;
+  /* Important for absolute badge */
+  width: 100%;
+  max-width: 1400px;
+  min-height: 85vh;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.316);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-frame {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
 }
 
 /* ==========================================================================
@@ -164,42 +140,44 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   flex: 1;
-  min-height: 0;
-  padding: 0 3rem 2rem 3rem;
+  min-height: 500px;
+  padding: 2rem 3rem 2rem 3rem;
   align-items: stretch;
-  overflow: hidden;
-  /* CRITICAL: Prevents children from escaping */
 }
+
 /* 1. TEXT */
 .hero-text-left {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  max-width: 280px;
 }
 
 .hero-text-left h1 {
   font-family: "Space Grotesk", sans-serif;
-  font-size: 2.5rem;
+  font-size: 2rem;
   line-height: 1.1;
   margin-bottom: 12px;
   color: var(--text-primary);
 }
 
 .hero-text-left p {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   line-height: 1.5;
   color: var(--text-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .btn-collaborate {
   background: var(--surface-dark);
   color: #ffffff;
-  padding: 12px 28px;
+  padding: 10px 24px;
   border-radius: var(--radius-pill);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -215,18 +193,84 @@ body {
   box-shadow: 0 15px 25px rgba(15, 23, 42, 0.25);
 }
 
-/* 2. PORTRAIT */
-/* 2. PORTRAIT */
-/* 2. PORTRAIT */
+/* ==========================================================================
+   2. PORTRAIT + BACKGROUND SCREENSHOT TRAIN
+   ========================================================================== */
 .portrait-container {
   height: 100%;
+  min-height: 400px;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
   position: relative;
-  padding-top: 1rem;
-  /* CRITICAL: Creates a stacking context for z-index to work correctly */
-  z-index: 1;
+  z-index: 5;
+  overflow: hidden;
+}
+
+/* Taller train wrapper to match navbar height */
+.project-train-wrapper {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  /* Increased from 180px */
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+  opacity: 5;
+}
+
+.project-train {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+
+  animation: slideTrain 10s linear infinite;
+  will-change: transform;
+}
+
+.project-train-image {
+  height: 100%;
+  width: auto;
+  min-width: 450px;
+  /* Wider images to match taller height */
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  filter: blur(0.5px);
+}
+
+@keyframes slideTrain {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Portrait image stays in front */
+.portrait-image-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.portrait-motion-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
 }
 
 .portrait-image {
@@ -235,132 +279,61 @@ body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  object-position: top;
+  object-position: bottom;
   position: relative;
-  /* CRITICAL: Forces image to the very top */
   z-index: 10;
   mask-image: linear-gradient(to top, transparent 0%, black 15%);
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
 }
 
-/* Name tag BEHIND the portrait */
-.portrait-label {
+/* 3. EMPTY SPACER
+.hero-right-spacer {
+  display: block;
+}*/
+
+/* ==========================================================================
+   HERO BADGE - Bottom Right of Hero Glass Wrapper
+   ========================================================================== */
+.hero-status-badge {
   position: absolute;
-  top: 20%;
-  /* Adjust this to move the text up/down behind your body */
-  left: 50%;
-  transform: translateX(-50%);
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 30;
+  display: inline-flex;
   align-items: center;
-  /* RESPONSIVE GAP: Scales with the screen width */
-    gap: clamp(20px, 15vw, 200px);
-
-  /* CRITICAL: Forces text behind the image */
-  z-index: 0;
-  pointer-events: none;
-  white-space: nowrap;
-
-  /* Makes it look like a faded background element */
-  opacity: 0.2;
-}
-
-.portrait-label span {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(2rem, 8vw, 8rem);
-  /* HUGE text to stretch past your shoulders */
-  font-weight: 300;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
   color: var(--text-primary);
-  letter-spacing: 2px;
-  line-height: 1;
+  background: var(--surface);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
 }
 
-/* 3. CARD */
-.hero-card-right-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding-bottom: 1rem;
-  perspective: 1000px;
-  /* Ensure the wrapper doesn't overflow the grid column */
-  width: 100%;
-    height: 100%;
-}
-
-.hero-card-right {
-  background: var(--surface-dark);
-  color: #ffffff;
-  border-radius: var(--radius-md);
-  width: 100%;
-  max-width: 300px;
-  min-height: 220px;
-  padding: 2rem;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transform-style: preserve-3d;
-/* Ensure the card doesn't overflow its container on smaller desktops */
-  max-height: 100%;
-    overflow: hidden;
-}
-
-.card-icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.05);
+.dot-green {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  flex-shrink: 0;
-    /* Prevents icon from shrinking */
-}
-
-.hero-card-right h3 {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-  color: var(--text-light);
-}
-
-.hero-card-right p {
-  font-size: 0.85rem;
-  color: #94a3b8;
-  line-height: 1.5;
-  margin: 0;
-    /* Allow text to scale down on smaller screens */
-      overflow-wrap: break-word;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
 }
 
 /* ==========================================================================
    MOBILE RESPONSIVENESS
    ========================================================================== */
 @media (max-width: 900px) {
-  .hero-wrapper {
+  .navbar {
     padding: 1rem;
-  }
-
-  .hero-frame {
-    height: auto;
-    min-height: 100vh;
-    padding-bottom: 2rem;
-  }
-
-  .hero-nav {
-    padding: 1.5rem 1rem;
     flex-wrap: wrap;
-    gap: 0.75rem;
     justify-content: center;
+    gap: 0.75rem;
+    top: 1rem;
+    width: 95%;
   }
 
   .nav-menu {
-    display: flex;
     gap: 1rem;
     order: 3;
     width: 100%;
@@ -373,23 +346,17 @@ body {
     padding: 6px 10px;
   }
 
-  .nav-left {
-    width: auto;
-    gap: 8px;
-  }
-
-  .nav-availability {
-    font-size: 0.7rem;
-    padding: 6px 10px;
-  }
-
   .nav-logo {
     height: 28px;
   }
 
-  .btn-talk {
-    padding: 8px 16px;
-    font-size: 0.8rem;
+  .hero-wrapper {
+    padding: 7rem 1rem 2rem 1rem;
+  }
+
+  .hero-glass-wrapper {
+    min-height: auto;
+    padding-bottom: 2rem;
   }
 
   .hero-grid {
@@ -397,34 +364,46 @@ body {
     padding: 1rem;
     gap: 2rem;
     align-items: center;
+    min-height: auto;
   }
 
-  /* REORDER: Portrait first, then text, then card */
+  .hero-right-spacer {
+    display: none;
+  }
+
   .portrait-container {
     order: -1;
-    height: 320px;
+    height: 350px;
+    min-height: auto;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 0;
-    overflow: hidden;
+  }
+
+  .project-train-wrapper {
+    height: 180px;
+    top: 10%;
+    opacity: 0.2;
+  }
+
+  .project-train-image {
+    min-width: 250px;
   }
 
   .hero-text-left {
     order: 1;
     text-align: center;
     padding-bottom: 0;
-    margin-top: 0;
     justify-content: flex-start;
-  }
-
-  .hero-card-right-wrapper {
-    order: 2;
-    justify-content: center;
-    padding-bottom: 0;
-  }
-
-  .hero-card-right {
     max-width: 100%;
+    align-items: center;
+  }
+
+  /* Badge stays at bottom right of hero-glass-wrapper */
+  .hero-status-badge {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.7rem;
+    padding: 6px 12px;
   }
 }
 /* ==========================================================================
